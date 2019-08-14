@@ -34,7 +34,6 @@ public class PlanControllingItemController {
     LocalDate iterator = planStart;
     int eventNr = 0;
     while (iterator.isBefore(planEnd)) {
-      iterator = iterator.plus(servicePlan.getEventRecurringDays(), ChronoUnit.DAYS);
 
       for (ServicePlanPosition position : servicePlan.getPositions()) {
         int finalEventNr = eventNr;
@@ -59,6 +58,7 @@ public class PlanControllingItemController {
             .build());
       }
       eventNr++;
+      iterator = iterator.plus(servicePlan.getEventRecurringDays(), ChronoUnit.DAYS);
     }
 
     return items;

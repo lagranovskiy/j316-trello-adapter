@@ -4,6 +4,7 @@ application:
     username: neo4j
     password: JV7GlVyIg5bj
   trello:
+    boardId: KWeHYqWo
     url: https://api.trello.com/1/
     apiKey: df1e086d197a13ded596f75b7e5a4abc
     apiToken: 9d23c87fb9e1539695c9cfebf02e025a6f342257b165af2989673dba808ffb39
