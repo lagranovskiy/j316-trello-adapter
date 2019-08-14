@@ -36,6 +36,8 @@ import org.springframework.stereotype.Component;
 public class TrelloCommunicationController {
 
   public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM");
+  public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
   @Value("${application.trello.boardId}")
   String boardId;
 
@@ -49,24 +51,9 @@ public class TrelloCommunicationController {
   String trelloAccessToken;
 
   OkHttpClient client = new OkHttpClient();
-  public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
   Gson gson = new Gson();
 
-  public void addServicePlanCheckItems(ServicePlan plan, List<PlanControllingItem> items) throws IOException {
-    TrelloBoard board = getBoardById(this.boardId);
-    TrelloBoardList planList = createList(board, plan.getPlanName());
-
-    for (PlanControllingItem item : items) {
-      TrelloBoardCard card = createCard(planList, item.getEventName(), item.getEventName(), item.getEventDate());
-      TrelloChecklist teilnehmerliste = createChecklist(card, "Teilnehmerliste");
-
-      for (Person person : item.getPersonList()) {
-        createChecklistItem(teilnehmerliste, person.getForename() + " " + person.getSurname());
-      }
-    }
-  }
-
-
+  
   public void addServicePlanGroupedCheckItems(ServicePlan plan, List<PlanControllingItem> items) throws IOException {
     TrelloBoard board = getBoardById(this.boardId);
     TrelloBoardList planList = createList(board, plan.getPlanName());
