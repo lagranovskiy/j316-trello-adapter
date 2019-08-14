@@ -61,4 +61,5 @@ public class InformationPreparationResource {
     return ResponseEntity.ok()
         .body(gson.toJson(items));
   }
+
 }
