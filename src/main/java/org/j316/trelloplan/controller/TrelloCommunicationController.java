@@ -53,7 +53,7 @@ public class TrelloCommunicationController {
   OkHttpClient client = new OkHttpClient();
   Gson gson = new Gson();
 
-  
+
   public void addServicePlanGroupedCheckItems(ServicePlan plan, List<PlanControllingItem> items) throws IOException {
     TrelloBoard board = getBoardById(this.boardId);
     TrelloBoardList planList = createList(board, plan.getPlanName());
