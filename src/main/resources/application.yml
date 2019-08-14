@@ -1,0 +1,5 @@
+application:
+  neo4j:
+    uri: bolt://188.68.50.2:7687
+    username: neo4j
+    password: JV7GlVyIg5bj
