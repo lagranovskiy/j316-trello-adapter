@@ -86,6 +86,7 @@ public class DataFetchController {
             .eventRecurringDays(Integer.valueOf(stringObjectMap.get("eventRecurringDays").toString()))
             .planStart(stringObjectMap.get("planStart").toString())
             .planEnd(stringObjectMap.get("planEnd").toString())
+            .calEventName(stringObjectMap.get("calEventName").toString())
             .positions(servicePlanPositions)
             .build();
 
