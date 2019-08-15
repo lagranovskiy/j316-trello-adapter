@@ -75,7 +75,7 @@ public class TrelloCommunicationController {
 
     List<LocalDate> eventDates = groupingMap.keySet().stream().sorted().collect(Collectors.toList());
     for (LocalDate eventDate : eventDates) {
-      String cardName = "Einsatz am " + eventDate.format(FORMATTER);
+      String cardName = plan.getCalEventName() + " Einsatz am " + eventDate.format(FORMATTER);
 
       String builder = plan.getPlanName()
           + " %0A------- %0A"
@@ -86,7 +86,7 @@ public class TrelloCommunicationController {
           + plan.getPlanEnd()
           + "**";
 
-      TrelloBoardCard card = createCard(planList, cardName, builder, eventDate.minus(2, ChronoUnit.DAYS));
+      TrelloBoardCard card = createCard(planList, cardName, builder, eventDate.minus(1, ChronoUnit.DAYS));
 
       List<PlanControllingItem> dateItemList = groupingMap.get(eventDate);
       for (PlanControllingItem item : dateItemList) {
