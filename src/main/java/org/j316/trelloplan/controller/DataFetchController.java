@@ -79,7 +79,7 @@ public class DataFetchController {
         };
         List<String> eventDates = gson.fromJson(eventDatesJson, dateTokens.getType());
 
-        ServicePlan servicePlan = ServicePlan.builder()
+        return ServicePlan.builder()
             .uuid(stringObjectMap.get("uuid").toString())
             .planName(stringObjectMap.get("planName").toString())
             .eventDates(eventDates)
@@ -90,7 +90,6 @@ public class DataFetchController {
             .positions(servicePlanPositions)
             .build();
 
-        return servicePlan;
       });
 
     }

@@ -3,6 +3,8 @@ package org.j316.trelloplan.controller;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ import org.springframework.stereotype.Component;
 public class TrelloCommunicationController {
 
   public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM");
+  public static final DateTimeFormatter FULL_FORMATTER = DateTimeFormatter.ofPattern("YYYY-MM-DDThh:mm:ss.SSS");
   public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
   @Value("${application.trello.boardId}")
@@ -86,7 +89,8 @@ public class TrelloCommunicationController {
           + plan.getPlanEnd()
           + "**";
 
-      TrelloBoardCard card = createCard(planList, cardName, builder, eventDate.minus(1, ChronoUnit.DAYS));
+      LocalDateTime dueDateTime = LocalDateTime.of(eventDate.minus(1, ChronoUnit.DAYS), LocalTime.of(19, 0));
+      TrelloBoardCard card = createCard(planList, cardName, builder, dueDateTime);
 
       List<PlanControllingItem> dateItemList = groupingMap.get(eventDate);
       for (PlanControllingItem item : dateItemList) {
@@ -146,9 +150,10 @@ public class TrelloCommunicationController {
   }
 
 
-  private TrelloBoardCard createCard(TrelloBoardList list, String cardName, String cardDesc, LocalDate due) throws IOException {
+  private TrelloBoardCard createCard(TrelloBoardList list, String cardName, String cardDesc, LocalDateTime due) throws IOException {
     Request request = new Request.Builder()
-        .url(url + "cards?name=" + cardName + "&idList=" + list.getId() + "&desc=" + cardDesc + "&due=" + due + "&key=" + trelloKey
+        .url(url + "cards?name=" + cardName + "&idList=" + list.getId() + "&desc=" + cardDesc + "&due=" + due.format(FORMATTER) + "&key="
+            + trelloKey
             + "&token=" + trelloAccessToken)
         .post(RequestBody.create(JSON, "{}"))
         .build();
