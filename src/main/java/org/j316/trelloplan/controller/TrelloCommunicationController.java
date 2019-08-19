@@ -38,7 +38,7 @@ import org.springframework.stereotype.Component;
 public class TrelloCommunicationController {
 
   public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM");
-  public static final DateTimeFormatter FULL_FORMATTER = DateTimeFormatter.ofPattern("YYYY-MM-DD'T'hh:mm:ss.SSS");
+  public static final DateTimeFormatter FULL_FORMATTER = DateTimeFormatter.ofPattern("YYYY-MM-dd'T'hh:mm:ss.SSS");
   public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
   @Value("${application.trello.boardId}")
@@ -152,7 +152,7 @@ public class TrelloCommunicationController {
 
   private TrelloBoardCard createCard(TrelloBoardList list, String cardName, String cardDesc, LocalDateTime due) throws IOException {
     Request request = new Request.Builder()
-        .url(url + "cards?name=" + cardName + "&idList=" + list.getId() + "&desc=" + cardDesc + "&due=" + due.format(FORMATTER) + "&key="
+        .url(url + "cards?name=" + cardName + "&idList=" + list.getId() + "&desc=" + cardDesc + "&due=" + due.format(FULL_FORMATTER) + "&key="
             + trelloKey
             + "&token=" + trelloAccessToken)
         .post(RequestBody.create(JSON, "{}"))
