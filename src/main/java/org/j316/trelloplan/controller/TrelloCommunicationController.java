@@ -38,7 +38,7 @@ import org.springframework.stereotype.Component;
 public class TrelloCommunicationController {
 
   public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM");
-  public static final DateTimeFormatter FULL_FORMATTER = DateTimeFormatter.ofPattern("YYYY-MM-DDThh:mm:ss.SSS");
+  public static final DateTimeFormatter FULL_FORMATTER = DateTimeFormatter.ofPattern("YYYY-MM-DD'T'hh:mm:ss.SSS");
   public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
   @Value("${application.trello.boardId}")
